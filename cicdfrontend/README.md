@@ -1,16 +1,38 @@
-# React + Vite
+# React CI/CD Pipeline with GitHub Actions & Docker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A beginner-friendly DevOps project that demonstrates a complete CI/CD pipeline for a React (Vite) application.
 
-Currently, two official plugins are available:
+## What this project does
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+On every push / pull request to `main`:
 
-## React Compiler
+1. Runs automated tests with **Vitest**
+2. Builds a production Docker image (multi-stage: Node build → Nginx)
+3. Pushes the image to **Docker Hub** (only on push to `main`)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech stack
 
-## Expanding the ESLint configuration
+| Tool | Purpose |
+|------|---------|
+| React + Vite | Frontend app |
+| Vitest + Testing Library | Unit tests |
+| Docker | Containerization |
+| Nginx | Serve production build |
+| GitHub Actions | CI/CD pipeline |
+| Docker Hub | Image registry |
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Project structure
+
+```text
+cicdfrontend/
+├── src/
+│   ├── App.jsx
+│   ├── App.test.jsx
+│   └── setupTests.js
+├── .github/workflows/
+│   └── ci-cd.yml
+├── Dockerfile
+├── .dockerignore
+├── vitest.config.js
+├── package.json
+└── README.md
